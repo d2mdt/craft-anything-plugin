@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "craft-anything": {
+      "command": "sh",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/bin/craft-anything-mcp", "mcp", "--all-tools"]
+    }
+  }
+}

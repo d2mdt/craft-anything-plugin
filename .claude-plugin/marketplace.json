@@ -1,0 +1,15 @@
+{
+  "name": "craft-anything-local",
+  "owner": { "name": "d2mdt" },
+  "metadata": {
+    "description": "Personal marketplace that wires the Craft Anything desktop app into Claude Code."
+  },
+  "plugins": [
+    {
+      "name": "craft-anything",
+      "source": "./plugins/craft-anything",
+      "description": "Use the Craft Anything engine from Claude Code: sign in to a website yourself in a visible window, then let Claude study the logged-in site's pages, network calls and front-end code.",
+      "version": "0.1.0"
+    }
+  ]
+}

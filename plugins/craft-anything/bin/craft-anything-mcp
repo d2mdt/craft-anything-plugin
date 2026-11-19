@@ -1,0 +1,32 @@
+#!/bin/sh
+# Finds the craft-anything-cli that ships with the Craft Anything desktop app and runs it
+# with the arguments given (the plugin passes: mcp --all-tools).
+# Override the search by setting CRAFT_ANYTHING_CLI to the full path of the program.
+
+# CRAFT_ANYTHING_DEEP=1 starts the server in Deep mode (network calls, scripts, page source).
+if [ "${CRAFT_ANYTHING_DEEP:-0}" = "1" ]; then set -- "$@" --deep; fi
+
+run() { cli="$1"; shift; exec "$cli" "$@"; }
+
+for c in \
+  "$CRAFT_ANYTHING_CLI" \
+  "$(command -v craft-anything-cli 2>/dev/null)" \
+  "/Applications/Craft Anything.app/Contents/MacOS/craft-anything-cli" \
+  "$HOME/Applications/Craft Anything.app/Contents/MacOS/craft-anything-cli" \
+  "/usr/bin/craft-anything-cli" \
+  "/usr/local/bin/craft-anything-cli" \
+  "$HOME/.cargo/bin/craft-anything-cli" \
+  "/c/Program Files/Craft Anything/craft-anything-cli.exe" \
+  "$LOCALAPPDATA/Programs/Craft Anything/craft-anything-cli.exe"
+do
+  if [ -n "$c" ] && [ -x "$c" ]; then run "$c" "$@"; fi
+done
+
+# Flatpak install on Linux
+if command -v flatpak >/dev/null 2>&1 && flatpak info ai.storyteller.craft-anything >/dev/null 2>&1; then
+  exec flatpak run --command=craft-anything-cli ai.storyteller.craft-anything "$@"
+fi
+
+echo "craft-anything plugin: could not find craft-anything-cli." >&2
+echo "Install the Craft Anything app, or set CRAFT_ANYTHING_CLI to the program's full path." >&2
+exit 127

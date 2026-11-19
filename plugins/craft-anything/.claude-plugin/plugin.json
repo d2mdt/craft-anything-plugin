@@ -1,0 +1,8 @@
+{
+  "name": "craft-anything",
+  "version": "0.1.0",
+  "description": "Craft Anything's 320-tool inspection engine as MCP tools, plus skills for signing in to a website and reviewing how its logged-in side works.",
+  "homepage": "https://github.com/storytold/craft-anything",
+  "license": "MIT OR Apache-2.0",
+  "keywords": ["craft-anything", "website", "login", "reverse-engineering", "mcp"]
+}
